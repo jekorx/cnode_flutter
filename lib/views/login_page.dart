@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:bot_toast/bot_toast.dart';
 import '../utils/http_util.dart';
 import '../utils/config.dart';
 import '../store/user_store.dart';
@@ -86,10 +86,7 @@ class _LoginPageState extends State<LoginPage> {
       form.save();
       _tokenCheck(_token);
     } else {
-      Fluttertoast.showToast(
-        msg: '请输入AccessToken',
-        gravity: ToastGravity.CENTER
-      );
+      BotToast.showText(text: '请输入AccessToken');
     }
   }
 
@@ -103,10 +100,7 @@ class _LoginPageState extends State<LoginPage> {
         _tokenCheck(barcode);
       } catch (e) {
         // 扫码错误
-        Fluttertoast.showToast(
-          msg: '扫码错误: $e',
-          gravity: ToastGravity.CENTER
-        );
+        BotToast.showText(text: '扫码错误: $e');
       }
     }
   }
@@ -128,17 +122,11 @@ class _LoginPageState extends State<LoginPage> {
       // 初始化收藏的话题
       _initCollect(name);
       // 提示成功
-      Fluttertoast.showToast(
-        msg: '登录成功',
-        gravity: ToastGravity.CENTER
-      );
+      BotToast.showText(text: '登录成功');
       // 返回页面
       Navigator.of(context).pop();
     } else {
-      Fluttertoast.showToast(
-        msg: '登录失败',
-        gravity: ToastGravity.CENTER
-      );
+      BotToast.showText(text: '登录失败');
     }
   }
 

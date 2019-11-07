@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../components/avatar.dart';
 import '../models/user.dart';
+import './image_preview.dart';
 
 class UserInfo extends StatelessWidget {
 
@@ -19,7 +20,12 @@ class UserInfo extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(top: 26),
-              child: user.avatarUrl != null ? Avatar(user.avatarUrl, size: 80) : null,
+              child: user.avatarUrl != null ? GestureDetector(
+                onTap: () {
+                  _imagePreview(user.avatarUrl, context);
+                },
+                child: Avatar(user.avatarUrl, size: 80),
+              ) : null,
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
@@ -59,7 +65,7 @@ class UserInfo extends StatelessWidget {
     );
   }
 
-    // url点击处理，浏览器中打开个人github
+  // url点击处理，浏览器中打开个人github
   void _openGitHub() async {
     String url = 'https://github.com/${user.githubUsername}';
     if (await canLaunch(url)) {
@@ -67,5 +73,12 @@ class UserInfo extends StatelessWidget {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  // 照片预览
+  void _imagePreview(String src, BuildContext context) {
+    Navigator.of(context).push(FadeRoute(page: ImagePreview(
+      NetworkImage(src)
+    )));
   }
 }

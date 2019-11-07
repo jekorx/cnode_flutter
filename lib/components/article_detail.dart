@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../models/article.dart';
 import '../models/topic.dart';
@@ -97,10 +97,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
         if (isCollect) {
           // 取消收藏
           collectStore.remove(id);
-          Fluttertoast.showToast(
-            msg: '取消收藏',
-            gravity: ToastGravity.CENTER
-          );
+          BotToast.showText(text: '取消收藏');
         } else {
           // 收藏主题
           collectStore.add(Topic(
@@ -109,10 +106,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
             title: widget.article.title,
             lastReplyAt: widget.article.lastReplyAt
           ));
-          Fluttertoast.showToast(
-            msg: '收藏成功',
-            gravity: ToastGravity.CENTER
-          );
+          BotToast.showText(text: '收藏成功');
         }
       }
     } catch (e) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/avatar.dart';
 import '../components/html_rich_text.dart';
 import '../models/reply.dart';
+import '../views/user_page.dart';
 
 class ReplyItem extends StatefulWidget {
   // 回复
@@ -33,9 +34,14 @@ class _ReplyItemState extends State<ReplyItem> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 10, right: 12),
-                child: Avatar(widget.reply.author.avatarUrl),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserPage(widget.reply.author)));
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 10, right: 12),
+                  child: Avatar(widget.reply.author.avatarUrl),
+                ),
               ),
               Expanded(
                 child: Row(

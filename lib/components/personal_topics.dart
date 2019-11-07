@@ -13,7 +13,7 @@ class PersonalTopics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ((collects != null && tabIndex == 2 && collects.length > 0) || tabList[tabIndex].length > 0) ? SliverFixedExtentList(
-      itemExtent: 104,
+      itemExtent: 106,
       delegate: SliverChildBuilderDelegate(
         (BuildContext ctx, int index) {
           if (collects != null && tabIndex == 2) {

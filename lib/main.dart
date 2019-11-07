@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:auto_size/auto_size.dart';
+import 'package:bot_toast/bot_toast.dart';
 import './utils/http_util.dart';
 import './utils/config.dart';
 import './views/home.dart';
@@ -26,12 +27,15 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        // brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
+    return BotToastInit(
+      child: MaterialApp(
+        theme: ThemeData(
+          // brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+        ),
+        navigatorObservers: [BotToastNavigatorObserver()],
+        home: Home(),
       ),
-      home: Home(),
     );
   }
 

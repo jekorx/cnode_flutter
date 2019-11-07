@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:bot_toast/bot_toast.dart';
 import './config.dart';
 
 // 返回结果包装类
@@ -57,8 +58,10 @@ class HttpUtil {
 
   // 封装请求初始化以及响应数据处理
   static Future<Result<T>> _request<T>(Function request) async {
+    CancelFunc cancel = BotToast.showLoading();
     Dio dio = _createInstance();
     Response response = await request(dio);
+    cancel();
     // 拼装结果对象
     return Result<T>(response.data['success'] as bool, response.data['data'] as T, response);
   }
