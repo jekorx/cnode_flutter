@@ -56,12 +56,14 @@ class _ArticleDetailState extends State<ArticleDetail> {
                 ),
                 Observer(
                   builder: (_) {
-                    bool isCollect = collectStore.has(widget.article.id);
+                    bool isCollect = collectStore.collectIds.contains(widget.article.id);
                     return SizedBox(
                       width: 70,
                       height: 30,
                       child: RaisedButton(
-                        onPressed: _collectHandle,
+                        onPressed: () {
+                          _collectHandle(isCollect);
+                        },
                         child: Text(isCollect ? '取消' : '收藏'),
                         color: isCollect ? Color(0xffe5e5e5) : Colors.blue,
                         textColor: isCollect ? Color(0xff999999) : Colors.white,
@@ -80,8 +82,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
   }
 
   // 收藏取消收藏操作
-  void _collectHandle() async {
-    bool isCollect = collectStore.has(widget.article.id);
+  void _collectHandle(bool isCollect) async {
     String url;
     String id = widget.article.id;
     // 取消收藏

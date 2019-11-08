@@ -10,39 +10,36 @@ class CollectStore = CollectStoreBase with _$CollectStore;
 abstract class CollectStoreBase with Store {
   // 收藏的话题
   @observable
-  List<Topic> collects = [];
+  ObservableList<Topic> collects = ObservableList<Topic>();
+
+  // 收藏话题id
+  @computed
+  List<String> get collectIds => this.collects.map((collect) => collect.id).toList();
 
   // 初始化
   @action
   void setAll(List<Topic> topics) {
-    collects = topics;
+    this.collects = ObservableList<Topic>.of(topics);
   }
 
   // 添加收藏话题
   @action
   void add(Topic topic) {
-    collects.add(topic);
+    this.collects.add(topic);
   }
 
   // 删除收藏话题
   @action
   void remove(String id) {
-    int index = collects.indexWhere((topic) => topic.id == id);
+    int index = this.collects.indexWhere((topic) => topic.id == id);
     if (index != 1) {
-      collects.removeAt(index);
+      this.collects.removeAt(index);
     }
-  }
-
-  // 是否存在
-  @action
-  bool has(String id) {
-    int index = collects.indexWhere((topic) => topic.id == id);
-    return index != -1;
   }
 
   // 清空
   @action
   void clear() {
-    collects = [];
+    this.collects.clear();
   }
 }

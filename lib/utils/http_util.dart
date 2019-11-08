@@ -58,10 +58,16 @@ class HttpUtil {
 
   // 封装请求初始化以及响应数据处理
   static Future<Result<T>> _request<T>(Function request) async {
-    CancelFunc cancel = BotToast.showLoading();
+    // 关闭所有loading
+    BotToast.closeAllLoading();
+    // 显示loading
+    BotToast.showLoading();
+    // 获取dio实例
     Dio dio = _createInstance();
+    // 执行请求
     Response response = await request(dio);
-    cancel();
+    // 关闭所有loading
+    BotToast.closeAllLoading();
     // 拼装结果对象
     return Result<T>(response.data['success'] as bool, response.data['data'] as T, response);
   }
@@ -120,6 +126,8 @@ class HttpUtil {
           return response;
         },
         onError: (DioError e) async {
+          // 关闭所有loading
+          BotToast.closeAllLoading();
           print('<<ERROR>> -> ${e.message} | ${e.request.path}');
           return e;
         },

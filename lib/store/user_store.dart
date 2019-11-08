@@ -26,8 +26,8 @@ abstract class UserStoreBase with Store {
 
   @action
   void clear() {
-    token = '';
-    name = '';
-    avatar = '';
+    this.token = '';
+    this.name = '';
+    this.avatar = '';
   }
 }
