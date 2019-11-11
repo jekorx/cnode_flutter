@@ -107,26 +107,31 @@ class _LoginPageState extends State<LoginPage> {
 
   // 检查token
   void _tokenCheck(String token) async {
-    // 检查token
-    Result<dynamic> check = await HttpUtil.post('/accesstoken', data: { 'accesstoken': token });
-    // 请求检查成功
-    if (check.response.statusCode == 200 && check.success) {
-      // 请求中设置默认携带token进行请求
-      HttpUtil.setDefaultParams({ 'accesstoken': token });
-      // 存储token
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString(Config.USER_TOKEN_KEY, token);
-      // 存入到mobx
-      String name = check.response.data['loginname'];
-      userStore.setInfo(token, name, check.response.data['avatar_url']);
-      // 初始化收藏的话题
-      _initCollect(name);
-      // 提示成功
-      BotToast.showText(text: '登录成功');
-      // 返回页面
-      Navigator.of(context).pop();
-    } else {
-      BotToast.showText(text: '登录失败');
+    try {
+      // 检查token
+      Result<dynamic> check = await HttpUtil.post('/accesstoken', data: { 'accesstoken': token });
+      // 请求检查成功
+      if (check.response.statusCode == 200 && check.success) {
+        // 请求中设置默认携带token进行请求
+        HttpUtil.setDefaultParams({ 'accesstoken': token });
+        // 存储token
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(Config.USER_TOKEN_KEY, token);
+        // 存入到mobx
+        String name = check.response.data['loginname'];
+        userStore.setInfo(token, name, check.response.data['avatar_url']);
+        // 初始化收藏的话题
+        _initCollect(name);
+        // 提示成功
+        BotToast.showText(text: '登录成功');
+        // 返回页面
+        Navigator.of(context).pop();
+      } else {
+        BotToast.showText(text: '无效的AccessToken');
+      }
+    } catch (e) {
+      // 登录失败
+      BotToast.showText(text: '无效的AccessToken');
     }
   }
 
