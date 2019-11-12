@@ -79,7 +79,7 @@ class _MainPageState extends State<MainPage> {
       floatingActionButton: _showToTop ? FloatingActionButton(
         onPressed: _toTop,
         tooltip: '返回顶部',
-        child: Icon(Icons.navigation),
+        child: Icon(Icons.arrow_upward),
       ) : null,
     );
   }

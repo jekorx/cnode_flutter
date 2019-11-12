@@ -105,7 +105,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
       floatingActionButton: _showToTop ? FloatingActionButton(
         onPressed: _toTop,
         tooltip: '返回顶部',
-        child: Icon(Icons.navigation),
+        child: Icon(Icons.arrow_upward),
       ) : null,
     );
   }

@@ -10,16 +10,20 @@ class Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      child: CachedNetworkImage(
-        imageUrl: url,
-        width: size,
-        height: size,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black12)),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+    return SizedBox(
+      width: size,
+      height: size,
+      child: ClipRRect(
+        child: CachedNetworkImage(
+          imageUrl: url,
+          width: size,
+          height: size,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black12)),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(size / 2)),
       ),
-      borderRadius: BorderRadius.all(Radius.circular(size / 2)),
     );
   }
 }
