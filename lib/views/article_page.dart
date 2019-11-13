@@ -140,4 +140,10 @@ class _ArticlePageState extends State<ArticlePage> {
       _list = result.data['replies'] as List<dynamic>;
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 }

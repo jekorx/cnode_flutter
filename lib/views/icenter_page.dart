@@ -182,4 +182,11 @@ class _IcenterPageState extends State<IcenterPage> with SingleTickerProviderStat
     });
     collectStore.setAll(collect.data.map((coll) => Topic.fromJson(coll as Map<String, dynamic>)).toList());
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+    _tabController.dispose();
+  }
 }

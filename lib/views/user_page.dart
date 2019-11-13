@@ -128,4 +128,11 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
       _tabList[2] = collect.data;
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+    _tabController.dispose();
+  }
 }

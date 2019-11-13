@@ -112,4 +112,10 @@ class _MainPageState extends State<MainPage> {
       }
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 }

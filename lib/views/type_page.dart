@@ -151,4 +151,11 @@ class _TypePageState extends State<TypePage> with SingleTickerProviderStateMixin
       }
     });
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+    _tabController.dispose();
+  }
 }
